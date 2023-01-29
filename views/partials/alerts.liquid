@@ -1,0 +1,10 @@
+{% if page_alerts %}
+  <script>
+    console.log("Alerts: ", {{ page_alerts | json }});
+    const alerts = {{ page_alerts | json | default: null }}
+    if (alerts) {
+      window.fcs = {};
+      fcs.alerts = alerts
+    }
+  </script>
+{% endif %}

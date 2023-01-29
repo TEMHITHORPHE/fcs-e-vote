@@ -1,14 +1,18 @@
 
-
-if (window.fcs) {
-	if (fcs.unit_records) {
-		console.log(fcs.unit_records);
-		window.onload = populateFormFields;
-	}
-	if (fcs.alerts) {
-		for (let index = 0; index < fcs.alerts.length; index++) {
-			const alert = fcs.alerts[index];
-			showAlert(alert.type, alert.message);
+window.onload = function () {
+	console.log("LOADED!!");
+	if (window.fcs) {
+		console.log("FCS-FOUND: ", window.fcs);
+		if (fcs.unit_records) {
+			console.log(fcs.unit_records);
+			window.onload = populateFormFields;
+		}
+		if (fcs.alerts) {
+			console.log("ALERTS-FOUND: ", window.fcs);
+			for (let index = 0; index < fcs.alerts.length; index++) {
+				const alert = fcs.alerts[index];
+				showAlert(alert.type, alert.message);
+			}
 		}
 	}
 }
@@ -61,7 +65,8 @@ function populateFormFields() {
 				const member = members[member_index];
 				// console.log(member);
 				const option_element = document.createElement("option");
-				option_element.value = member.first_name;
+				// option_element.value = member.first_name;
+				option_element.value = member.id;
 				option_element.text = member.first_name + " " + member.last_name;
 				dropdown_fragment.appendChild(option_element);
 			}
@@ -131,6 +136,3 @@ function showAlert(alert_type, message) {
 
 
 
-window.onload = function () {
-	// showAlert('error', "Error!, Access Code Invalid!");
-}
