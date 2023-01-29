@@ -47,8 +47,20 @@
     </div>
 
   </main>
+  <script>
+    console.log("Alerts: ", {{ page_alerts }});
+  </script>
 
-  <script></script>
+  {% if page_alerts %}
+    <script>
+      console.log("Alerts: ", {{ page_alerts }});
+      const alerts = {{ page_alerts | default: null }}
+      if (alerts) {
+        window.fcs = {};
+        fcs.alerts = alerts
+      }
+    </script>
+  {% endif %}
 {% endblock %}
 
 {% block footer %}{% endblock %}
