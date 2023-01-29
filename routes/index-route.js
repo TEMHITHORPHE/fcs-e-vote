@@ -19,7 +19,7 @@ router.post('/', async function (req, res, next) {
       .from('AccessCodes')
       .select('is_used')
       console.log('AccessCodes: ', AccessCodes);
-      if (AccessCodes)
+      // if (AccessCodes)
     // req.session.access_code = 'qwertyuiop';
   }
   res.render('index', { title: 'Home Page' });
