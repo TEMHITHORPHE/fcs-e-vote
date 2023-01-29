@@ -1,0 +1,28 @@
+{
+  "name": "e-vote",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon -e liquid,js ./bin/www --trace-warnings"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.5.0",
+    "cookie-parser": "~1.4.4",
+    "cookie-session": "^2.0.0",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "liquidjs": "^10.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/test/**",
+      "**/docs/**"
+    ],
+    "delay": 700
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

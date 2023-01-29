@@ -1,0 +1,148 @@
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* background: url(../images/blob-scene-haikei.svg); */
+}
+
+main.index {
+  background: url(../images/Polygon\ Luminary\ \(3\).svg);
+  background-size: cover;
+  height: 100%;
+  padding: 0px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* color: #5e4dcd; */
+}
+
+.index-bg {
+  background: url(../images/wave-haikei-logo-blue-light.svg);
+  background-repeat: repeat repeat;
+  background-size: contain;
+  height: 100%;
+}
+
+/* DEFAULT OVERRIDES */
+fieldset,
+legend {
+  all: revert;
+}
+
+legend {
+  text-align: left;
+}
+
+.input-group-text:first-child {
+  width: 170px;
+}
+
+
+
+
+/* From uiverse.io by @Ali-Tahmazi99 */
+#nomination_submit_btn {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #03045e;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  z-index: 1;
+}
+
+#nomination_submit_btn::before,
+#nomination_submit_btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  -webkit-transform: skew(15deg);
+  -ms-transform: skew(15deg);
+  transform: skew(15deg);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  overflow: hidden;
+  z-index: -1;
+}
+
+#nomination_submit_btn::before {
+  left: -10px;
+  background: #240046;
+}
+
+#nomination_submit_btn::after {
+  right: -10px;
+  background: #5a189a;
+}
+
+#nomination_submit_btn:hover::before,
+#nomination_submit_btn:hover::after {
+  width: 58%;
+}
+
+#nomination_submit_btn:hover span {
+  color: #e0aaff;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#nomination_submit_btn span {
+  color: #03045e;
+  font-size: 18px;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.codebox-input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.codebox-input {
+  min-height: 50px;
+  max-width: 3000px;
+  padding: 0 1rem;
+  color: #5e4dcd;
+  font-size: 17px;
+  letter-spacing:2px;
+  border: 1px solid #5e4dcd;
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.codebox-button--submit {
+  min-height: 50px;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background-color: #5e4dcd;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.codebox-button--submit:hover {
+  background-color: #5e5dcd;
+}
+
+.codebox-input:focus,
+.codebox-input:focus-visible {
+  border-color: #3898ec;
+  outline: none;
+}

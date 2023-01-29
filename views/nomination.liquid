@@ -1,0 +1,109 @@
+{% layout "base-layout" %}
+
+{% block head %}
+
+  <head>
+    {% render 'header' title: title %}
+  </head>
+{% endblock %}
+
+{% block body %}
+
+  <div id="" class="row justify-content-center text-center text-white">
+    <header class="row justify-content-center mb-4 text-bold">
+      <div class="col-3">
+        <!-- <img src="/images/Polygon Luminary (1).svg" alt=""> -->
+        <img
+          src="/images/logo-fcs.png"
+          width="100"
+          alt="">
+      </div>
+      <div></div>
+    </header>
+    <div class="col-6 py-4 index-bg">
+      <form
+        class=""
+        action=""
+        method="post">
+
+        {%- for units in unit_records %}
+          {%- assign unit_name = units[0] %}
+          {%- assign id = unit_name | remove: ' ' %}
+
+          <fieldset id="{{ id }}" class="mb-4">
+            <legend>{{ unit_name }}</legend>
+            <div class="input-group mb-3">
+              <span class="input-group-text" for="{{ id }}-1">First Nominee:</span>
+              <select
+                id="{{ id }}-1"
+                class="form-select {{ id }}"
+                name="{{ id }}">
+                <option value=null selected>Select a name ...</option>
+              </select>
+              <span class="input-group-text">@</span>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" for="{{ id }}-2">Second Nominee:</span>
+              <select
+                id="{{ id }}-2"
+                class="form-select {{ id }}"
+                name="{{ id }}">
+                <option value=null selected>Select a name ...</option>
+              </select>
+              <span class="input-group-text">@</span>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" for="{{ id }}-3">Third Nominee:</span>
+              <select
+                id="{{ id }}-3"
+                class="form-select {{ id }}"
+                name="{{ id }}">
+                <option value=null selected>Select a name ...</option>
+              </select>
+              <span class="input-group-text">@</span>
+            </div>
+          </fieldset>
+
+        {%- endfor %}
+
+        <button id="nomination_submit_btn">
+          <span>
+            Submit
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+    // const nominationFormData = {
+// "Evangelism Unit": [],
+// "Press Unit": [],
+// "Ushering Unit": [],
+// "Designers Unit": [],
+// "Bible Study Unit (ICU)": [],
+// "Maintenance Unit": [],
+// "Drama Unit (IDM)": [],
+// "Prayer Unit": [],
+// "Music Unit (TLV)": [],
+// }
+    `{
+		"id": "c5fa91a1-a494-4ced-9787-72e80d0d1749",
+		"first_name": "Sheela",
+		"last_name": "Follacaro",
+		"gender": "Female",
+		"level": " 500",
+		"unit": "Drama Unit IDM",
+		"campus": " Bosso"
+    }`
+
+    window.fcs = {};
+    fcs.unit_records = {{ unit_records | json }};
+    fcs.units = {{ units | json }};
+    console.log(fcs.unit_records);
+    console.log(fcs.units);
+  </script>
+{% endblock %}

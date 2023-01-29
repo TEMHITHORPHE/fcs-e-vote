@@ -1,0 +1,54 @@
+{% layout "base-layout" %}
+
+{% block head %}
+  <head>
+    {% render 'header' with title as title %}
+  </head>
+{% endblock %}
+
+{% block body %}
+  <main class="index container-fluid text-center text-blue">
+
+    <div class="row justify-content-center" style="height:100%; margin:0px">
+
+      <header class="position-relative row justify-content-center align-self-start pt-3 text-bold">
+        <div class="col-3">
+          <!-- <img src="/images/Polygon Luminary (1).svg" alt=""> -->
+          <img
+            src="/images/logo-fcs.png"
+            width="100"
+            alt="">
+        </div>
+        <div></div>
+
+        <!-- ALERT POPUP MODAL POSITIONED RELATIVE TO HEADER -->
+      </header>
+
+      <div class="row align-self-center justify-content-center" style="margin-top:-1rem">
+        <form class="col-8 codebox-input-group justify-content-center" method="post">
+          <input
+            type="text"
+            class="codebox-input"
+            id="codebox"
+            name="codebox"
+            placeholder="Access Code Here ..."
+            autocomplete="off">
+          <input
+            class="codebox-button--submit"
+            value="Access"
+            type="submit">
+        </form>
+      </div>
+
+      <footer class="align-self-end justify-content-center pb-3">
+        © FCS FUTMinna, 2022.
+      </footer>
+
+    </div>
+
+  </main>
+
+  <script></script>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  {% block head %}{% endblock %}
+
+  <body>
+    {% block body %}{% endblock %}
+    {% block footer %}
+      {% render 'footer' %}
+    {% endblock %}
+  </body>
+
+</html>
