@@ -3,7 +3,7 @@
 {% block head %}
 
   <head>
-    {% render 'header' title: title %}
+    {% render 'header' title: title, js_scripts: js_scripts %}
   </head>
 {% endblock %}
 
@@ -20,60 +20,67 @@
       </div>
       <div></div>
     </header>
-    <div class="col-6 py-4 index-bg">
-      <form
-        class=""
-        action=""
-        method="post">
+    <div class="col-8 py-4 index-bg">
 
-        {%- for units in unit_records %}
-          {%- assign unit_name = units[0] %}
-          {%- assign id = unit_name | remove: ' ' %}
+      {%- for units in unit_records %}
+        {%- assign unit_name = units[0] %}
+        {%- assign id = unit_name | remove: ' ' %}
+
+        <form
+          class=""
+          action=""
+          method="post">
 
           <fieldset id="{{ id }}" class="mb-4">
             <legend>{{ unit_name }}</legend>
             <div class="input-group mb-3">
-              <span class="input-group-text" for="{{ id }}-1">First Nominee:</span>
+              <!-- <span class="input-group-text" for="{{ id }}-1">First Nominee:</span> -->
               <select
                 id="{{ id }}-1"
                 class="form-select {{ id }}"
                 name="{{ id }}">
-                <option value=null selected>Select a name ...</option>
+                <option value=null selected>First Nominee:</option>
               </select>
               <span class="input-group-text">@</span>
             </div>
 
             <div class="input-group mb-3">
-              <span class="input-group-text" for="{{ id }}-2">Second Nominee:</span>
+              <!-- <span class="input-group-text" for="{{ id }}-2">Second Nominee:</span> -->
               <select
                 id="{{ id }}-2"
                 class="form-select {{ id }}"
                 name="{{ id }}">
-                <option value=null selected>Select a name ...</option>
+                <option value=null selected>Second Nominee:</option>
               </select>
               <span class="input-group-text">@</span>
             </div>
 
             <div class="input-group mb-3">
-              <span class="input-group-text" for="{{ id }}-3">Third Nominee:</span>
+              <!-- <span class="input-group-text" for="{{ id }}-3">Third Nominee:</span> -->
               <select
                 id="{{ id }}-3"
                 class="form-select {{ id }}"
                 name="{{ id }}">
-                <option value=null selected>Select a name ...</option>
+                <option value=null selected>Third Nominee:</option>
               </select>
               <span class="input-group-text">@</span>
+              <label class="dropdown-switch">
+                <input type="checkbox" checked="">
+              </label>
             </div>
+            <button
+              type="button"
+              id="nomination_submit_btn"
+              onclick="nominate('{{ id }}')">
+              <span>
+                Nominate
+              </span>
+            </button>
           </fieldset>
 
-        {%- endfor %}
+        </form>
 
-        <button id="nomination_submit_btn">
-          <span>
-            Submit
-          </span>
-        </button>
-      </form>
+      {%- endfor %}
     </div>
   </div>
 
