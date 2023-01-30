@@ -2,7 +2,7 @@
 
 {% block head %}
   <head>
-    {% render 'header' with title as title %}
+    {% render 'header' with title as title%}
   </head>
 {% endblock %}
 
@@ -24,8 +24,10 @@
         <!-- ALERT POPUP MODAL POSITIONED RELATIVE TO HEADER -->
       </header>
 
-      <div class="row align-self-center justify-content-center" style="margin-top:-1rem">
-        <form class="col-8 codebox-input-group justify-content-center" method="post">
+      <section class="vstack gap-4 align-self-center justify-content-center" style="margin-top:-1rem">
+        <section id="code-card-anchor" class="w-auto mx-auto gap-2 hstack">
+        </section>
+        <form class="col-6 mx-auto codebox-input-group justify-content-center" method="post">
           <input
             type="text"
             class="codebox-input"
@@ -38,7 +40,17 @@
             value="Access"
             type="submit">
         </form>
-      </div>
+        {% if next_page %}
+          <a class="col-2 mx-auto" href="{{ next_page }}">
+            <button class="cssbuttons-io-button"> CONTINUE
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </button>
+              </a>
+            {% endif %}
+        </section>
 
       <footer class="align-self-end justify-content-center pb-3">
         © FCS FUTMinna, 2022.
@@ -48,17 +60,24 @@
 
   </main>
   <script>
-    console.log("Alerts: ", {{ page_alerts }});
+    console.log("Alerts: ", {{ page_alerts | json }});
   </script>
 
   {% if page_alerts %}
     <script>
-      console.log("Alerts: ", {{ page_alerts }});
-      const alerts = {{ page_alerts | default: null }}
+      console.log("Alerts: ", {{ page_alerts | json }});
+      const alerts = {{ page_alerts | json | default: null }}
       if (alerts) {
         window.fcs = {};
         fcs.alerts = alerts
       }
+    </script>
+  {% endif %}
+
+  {% if voting_entity %}
+    <script>
+      window.localStorage.setItem("voting_entity", {{ voting_entity | json }});
+      console.log("Entity Xtored.");
     </script>
   {% endif %}
 {% endblock %}
