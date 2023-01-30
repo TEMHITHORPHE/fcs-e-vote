@@ -43,9 +43,17 @@ router.post('/nomination/:unit_id', function (req, res, next) {
   const req_body = req.body;
   const unit_id = req.params.unit_id;
 
-  console.log("REQ-[POST]-[/election/nomination] : ", req.params.unit_id, req_body);
-
+  console.log("REQ-[POST]-[/election/nomination] : ", unit_id, req_body);
+  // Make sure Unit exists and that number of nominees does not exceed the maximum.
   if (!units.includes(unit_id) || req.body.length.toString() !== process.env.NOMINEES_PER_UNIT) return res.send({ status: 400, message: 'Unit not recognized' });
+
+      // Modify entity session
+      const entity = {
+        access_code: AccessCodes.access_code,
+        tag: AccessCodes.tag,
+        nominations: {}
+      }
+      req.session.entity = entity;
 
   return res.json({ status: 200, message: 'success' });
 
