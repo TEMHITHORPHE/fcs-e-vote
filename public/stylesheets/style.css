@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 28px "Lucida Grande", Helvetica, Arial, sans-serif;
   /* background: url(../images/blob-scene-haikei.svg); */
 }
 
@@ -25,7 +25,7 @@ main.index {
   background: url(../images/wave-haikei-logo-blue-light.svg);
   background-repeat: repeat repeat;
   background-size: contain;
-  height: 100%;
+  /* height: 100%; */
 }
 
 /* DEFAULT OVERRIDES */
@@ -42,16 +42,35 @@ legend {
   width: 170px;
 }
 
+.form-select {
+  font-size:inherit;
+}
 
+.code-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px; 
+  height: 60px;
+  border-radius: 9px;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+}
 
+.code-card > h2 {
+  margin-bottom: 0;
+}
 
 /* From uiverse.io by @Ali-Tahmazi99 */
 #nomination_submit_btn {
+  background-color: transparent;
   display: inline-block;
-  width: 150px;
+  width: 160px;
   height: 50px;
   border-radius: 10px;
-  border: 1px solid #03045e;
+  /* border: 1px solid #03045e; */
+  border: 3px solid #ffffff;
   position: relative;
   overflow: hidden;
   -webkit-transition: all 0.5s ease-in;
@@ -77,12 +96,14 @@ legend {
 
 #nomination_submit_btn::before {
   left: -10px;
-  background: #240046;
+  /* background: #240046; */
+  background: #ffffff;
 }
 
 #nomination_submit_btn::after {
   right: -10px;
-  background: #5a189a;
+  /* background: #5a189a;   */
+  background: #6152ee;  
 }
 
 #nomination_submit_btn:hover::before,
@@ -91,17 +112,53 @@ legend {
 }
 
 #nomination_submit_btn:hover span {
-  color: #e0aaff;
+  color: #03045e;
+  /* color: #e0aaff; */
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
 #nomination_submit_btn span {
-  color: #03045e;
-  font-size: 18px;
+
+  color: #ffffff;
+  font-size: 24px;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
 }
+
+.dropdown-switch {
+  --false: #E81B1B;
+  --true: #009068;
+ }
+ 
+ .dropdown-switch > input[type=checkbox] {
+  appearance: none;
+  height: 2rem;
+  width: 3.5rem;
+  background-color: #fff;
+  position: relative;
+  border-radius: .2em;
+  cursor: pointer;
+ }
+ 
+ .dropdown-switch > input[type=checkbox]::before {
+  content: '';
+  display: block;
+  height: 1.9em;
+  width: 1.9em;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: calc(1.9em/2 + .3em);
+  background-color: var(--false);
+  border-radius: .2em;
+  transition: .3s ease;
+ }
+ 
+ .dropdown-switch > input[type=checkbox]:checked::before {
+  background-color: var(--true);
+  left: calc(100% - (1.9em/2 + .3em));
+ }
 
 .codebox-input-group {
   display: -webkit-box;

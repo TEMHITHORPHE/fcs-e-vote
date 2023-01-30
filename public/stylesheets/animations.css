@@ -1,2 +1,88 @@
-@-webkit-keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}
+@-webkit-keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}
+@keyframes slide-in-left{0%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}
 .slide-in-left{-webkit-animation:slide-in-left 1s cubic-bezier(.23,1.000,.32,1.000) both;animation:slide-in-left 1s cubic-bezier(.23,1.000,.32,1.000) both}
+@-webkit-keyframes slide-out-left{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}}
+@keyframes slide-out-left{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(-1000px);transform:translateX(-1000px);opacity:0}}
+.slide-out-left{-webkit-animation:slide-out-left .5s cubic-bezier(.55,.085,.68,.53) both;animation:slide-out-left .5s cubic-bezier(.55,.085,.68,.53) both}
+
+@keyframes slide-out-in-left {
+	0% {
+		-webkit-transform:translateX(-1000px);
+		transform:translateX(-1000px);
+		opacity:0
+	}
+	20% {
+		-webkit-transform:translateX(0);
+		transform:translateX(0);
+		opacity:1
+	}
+	80% {
+		-webkit-transform:translateX(0);
+		transform:translateX(0);
+		opacity:1
+	}
+	100% {
+		-webkit-transform:translateX(-1000px);
+		transform:translateX(-1000px);
+		opacity:0
+	}
+}
+
+.slide-out-in-left {
+	animation:slide-out-in-left 4s cubic-bezier(.23,1.000,.32,1.000) both;
+}
+
+.cssbuttons-io-button {
+	/* background: #A370F0; */
+	background: #6152ee;
+	color: white;
+	font-family: inherit;
+	padding: 0.35em;
+	padding-left: 1.2em;
+	font-size: 17px;
+	font-weight: 500;
+	border-radius: 0.9em;
+	border: none;
+	letter-spacing: 0.05em;
+	display: flex;
+	align-items: center;
+	box-shadow: inset 0 0 1.6em -0.6em #714da6;
+	overflow: hidden;
+	position: relative;
+	height: 2.8em;
+	padding-right: 3.3em;
+   }
+   
+   .cssbuttons-io-button .icon {
+	background: white;
+	margin-left: 1em;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2.2em;
+	width: 2.2em;
+	border-radius: 0.7em;
+	box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+	right: 0.3em;
+	transition: all 0.3s;
+   }
+   
+   .cssbuttons-io-button:hover .icon {
+	width: calc(100% - 0.6em);
+   }
+   
+   .cssbuttons-io-button .icon svg {
+	width: 1.1em;
+	transition: transform 0.3s;
+	color: #7b52b9;
+   }
+   
+   .cssbuttons-io-button:hover .icon svg {
+	transform: translateX(0.1em);
+   }
+   
+   .cssbuttons-io-button:active .icon {
+	transform: scale(0.95);
+   }
+   
