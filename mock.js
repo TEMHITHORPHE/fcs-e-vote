@@ -806,11 +806,16 @@ const member_data = [
 		"campus": " Bosso"
 	}
 ]
+module.exports.member_data = member_data;
+
+member_data.map(function (member, index, member_data) {
+	member_data[index].unit = member.unit.toLowerCase().split(" ").join("_");
+});
+console.log(member_data);
 
 
 const member_data_by_units = {};
 module.exports.member_data_by_units = member_data_by_units;
-module.exports.member_data = member_data;
 
 const unit_set = new Set();
 for (let index = 0; index < member_data.length; index++) {
