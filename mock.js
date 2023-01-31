@@ -810,8 +810,8 @@ module.exports.member_data = member_data;
 
 member_data.map(function (member, index, member_data) {
 	member_data[index].unit = member.unit.toLowerCase().split(" ").join("_");
-});
-console.log(member_data);
+  });
+// console.log(member_data);
 
 
 const member_data_by_units = {};
