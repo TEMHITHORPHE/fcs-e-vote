@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  font: 28px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
   /* background: url(../images/blob-scene-haikei.svg); */
 }
 
@@ -44,6 +44,10 @@ legend {
 
 .form-select {
   font-size:inherit;
+}
+
+.badge:empty{
+  display: inline;
 }
 
 .code-card {
@@ -146,9 +150,9 @@ legend {
   display: block;
   height: 1.9em;
   width: 1.9em;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
+  /* transform: translate(-50%, -50%); */
+  /* position: absolute; */
+  /* top: 50%; */
   left: calc(1.9em/2 + .3em);
   background-color: var(--false);
   border-radius: .2em;

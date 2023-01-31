@@ -20,7 +20,7 @@
       </div>
       <div></div>
     </header>
-    <div class="col-8 py-4 index-bg">
+    <div class="col-8 col-lg-6 py-4 index-bg">
 
       {%- for units in unit_records %}
         {%- assign unit_name = units[0] %}
@@ -38,10 +38,12 @@
               <select
                 id="{{ id }}-1"
                 class="form-select {{ id }}"
-                name="{{ id }}">
+                name="{{ id }}"
+                onchange="nomineeChange(this)">
                 <option value=null selected>First Nominee:</option>
               </select>
-              <span class="input-group-text">@</span>
+              <span class="badge" style="width:54px;background-color:#ffffff"></span>
+
             </div>
 
             <div class="input-group mb-3">
@@ -49,10 +51,12 @@
               <select
                 id="{{ id }}-2"
                 class="form-select {{ id }}"
-                name="{{ id }}">
+                name="{{ id }}"
+                onchange="nomineeChange(this)">
                 <option value=null selected>Second Nominee:</option>
               </select>
-              <span class="input-group-text">@</span>
+              <span class="badge" style="width:54px;background-color:#ffffff"></span>
+
             </div>
 
             <div class="input-group mb-3">
@@ -60,13 +64,12 @@
               <select
                 id="{{ id }}-3"
                 class="form-select {{ id }}"
-                name="{{ id }}">
+                name="{{ id }}"
+                onchange="nomineeChange(this)">
                 <option value=null selected>Third Nominee:</option>
               </select>
-              <span class="input-group-text">@</span>
-              <label class="dropdown-switch">
-                <input type="checkbox" checked="">
-              </label>
+              <span class="badge" style="width:54px;background-color:#ffffff"></span>
+
             </div>
             <button
               type="button"
@@ -84,6 +87,12 @@
     </div>
   </div>
 
+  {% if voting_entity %}
+    <script>
+      window.localStorage.setItem("voting_entity", {{ voting_entity | json }});
+      console.log("Entity Xtored.");
+    </script>
+  {% endif %}
 
   <script>
     // const nominationFormData = {
