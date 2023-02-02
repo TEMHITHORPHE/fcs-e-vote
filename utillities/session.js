@@ -1,5 +1,7 @@
 function SessionHandler(req, res, next) {
-	if (req.session.isNew  && req.baseUrl !== '/election') return res.redirect('/');
+	console.log("[SESSION]-[", req.baseUrl, "]: ", req.session);
+	// console.log(req.session);
+	if (req.session.isNew) return res.redirect('/');
 	next();
 };
 
