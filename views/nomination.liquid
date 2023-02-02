@@ -24,7 +24,7 @@
 
       {%- for units in unit_records %}
         {%- assign unit_name = units[0] %}
-        {%- assign id = unit_name | remove: ' ' %}
+        {%- assign id = unit_name | replace: ' ', '_' | downcase %}
 
         <form
           class=""
@@ -34,7 +34,6 @@
           <fieldset id="{{ id }}" class="mb-4">
             <legend>{{ unit_name }}</legend>
             <div class="input-group mb-3">
-              <!-- <span class="input-group-text" for="{{ id }}-1">First Nominee:</span> -->
               <select
                 id="{{ id }}-1"
                 class="form-select {{ id }}"
@@ -45,9 +44,7 @@
               <span class="badge" style="width:54px;background-color:#ffffff"></span>
 
             </div>
-
             <div class="input-group mb-3">
-              <!-- <span class="input-group-text" for="{{ id }}-2">Second Nominee:</span> -->
               <select
                 id="{{ id }}-2"
                 class="form-select {{ id }}"
@@ -58,19 +55,20 @@
               <span class="badge" style="width:54px;background-color:#ffffff"></span>
 
             </div>
+            <!--
 
             <div class="input-group mb-3">
-              <!-- <span class="input-group-text" for="{{ id }}-3">Third Nominee:</span> -->
-              <select
-                id="{{ id }}-3"
-                class="form-select {{ id }}"
-                name="{{ id }}"
-                onchange="nomineeChange(this)">
-                <option value=null selected>Third Nominee:</option>
-              </select>
-              <span class="badge" style="width:54px;background-color:#ffffff"></span>
+            <select
+            id="{{ id }}-3"
+            class="form-select {{ id }}"
+            name="{{ id }}"
+            onchange="nomineeChange(this)">
+            <option value=null selected>Third Nominee:</option>
+            </select>
+            <span class="badge" style="width:54px;background-color:#ffffff"></span>
 
             </div>
+            -->
             <button
               type="button"
               id="nomination_submit_btn"
@@ -84,6 +82,17 @@
         </form>
 
       {%- endfor %}
+
+      <form action="nomination/signout" method="post">
+        <button
+          class="mt-4 w-auto"
+          type="submit"
+          id="nomination_submit_btn">
+          <span>
+            My Work Here Is Done.
+          </span>
+        </button>
+      </form>
     </div>
   </div>
 
