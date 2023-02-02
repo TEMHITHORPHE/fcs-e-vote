@@ -2,6 +2,9 @@ const router = require('express').Router();
 module.exports = router;
 
 const { supabase } = require('../model/db');
+const { nominators } = require('../model/dbQueries');
+
+const election_link = process.env.ELECTION_LINK;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -10,7 +13,7 @@ router.get('/', function (req, res, next) {
 
   if (req.session.isNew || !req.session.isPopulated) return res.render('index', { title: 'Home Page' });
   return res.render('index', {
-    title: 'Home Page', 
+    title: 'Home Page',
     next_page: "/election/nomination",
   })
 });
@@ -30,33 +33,39 @@ router.post('/', async function (req, res, next) {
     console.log('AccessCodes: ', AccessCodes);
 
     if (AccessCodes && AccessCodes.is_used === false) {
-      // Set up entity session
+
       const entity = {
         access_code: AccessCodes.access_code,
         tag: AccessCodes.tag,
         nominations: {}
       }
+
+      let { data, error } = await supabase
+        .rpc('initialize_access_code', {
+          voting_access_code: AccessCodes.access_code
+        });
+
+      // if (error) console.error(error);
+      console.log("[index-route.js] - [Initialized-Access-Code-Error] : ", error);
+
+      if (error) return res.render('index', { ...Errors.unexpected, next_page: req.session.entity ? election_link : null });
+
+      nominators.addNominator(AccessCodes.access_code);
       req.session.entity = entity;
 
-      // const { error } = await supabase
-      //   .from('AccessCodes')
-      //   .update({ is_used: true })
-      //   .eq('access_code', AccessCodes.access_code)
-      //   .select();
-
-      // if (error) return res.render('index', Errors.unexpected);
       res.render('index', {
         title: 'Home Page',
         page_alerts: [{ type: 'success', message: 'Hooray! ... Access code valid!' }],
-        next_page: "/election/nomination",
+        next_page: election_link,
         voting_entity: JSON.stringify(entity)
       });
+
     }
     else if (AccessCodes === null || AccessCodes.is_used) {
-      return res.render('index', Errors.invalid);
+      return res.render('index', { ...Errors.invalid, next_page: req.session.entity ? election_link : null });
     }
     else if (error) {
-      return res.render('index', Errors.unexpected);
+      return res.render('index', { ...Errors.unexpected, next_page: req.session.entity ? election_link : null });
     }
   }
 });

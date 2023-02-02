@@ -66,6 +66,13 @@ legend {
   margin-bottom: 0;
 }
 
+#alert-anchor {
+  position: fixed;
+  top: 200px;
+  left: 50px;
+  z-index: 100;
+}
+
 /* From uiverse.io by @Ali-Tahmazi99 */
 #nomination_submit_btn {
   background-color: transparent;
