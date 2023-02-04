@@ -10,8 +10,9 @@ const { Liquid } = require('liquidjs');
 
 // Import Routes
 const indexRouter = require('./routes/index-route');
+const apiRouter = require('./routes/api-route');
 const votingRouter = require('./routes/voting-route');
-const usersRouter = require('./routes/users-route');
+const electionRouter = require('./routes/election-route');
 
 
 // Instantiate Express
@@ -51,7 +52,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/election', votingRouter);
-app.use('/api/v1/users', usersRouter);
+app.use('/election', electionRouter);
+app.use('/api/v1/e-vote/', apiRouter);
 
 
 
