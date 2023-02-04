@@ -27,15 +27,15 @@ async function displayCodeCard() {
 	if (!store_value) return;
 
 	const entity = JSON.parse(store_value);
-	if (!entity || !entity.access_code) return;
+	if (!entity || !entity.access_token) return;
 
 	const code_card_anchor = document.getElementById('code-card-anchor');
 	console.log("LOCAL-STORE: ", entity);
 	if (!code_card_anchor) return;
 
 	let cardHTML = ""
-	for (let index = 0; index < entity.access_code.length; index++) {
-		const char = entity.access_code[index];
+	for (let index = 0; index < entity.access_token.length; index++) {
+		const char = entity.access_token[index];
 		cardHTML += `
 		<div class="code-card">
 		<h2>${char}</h2>
@@ -71,7 +71,7 @@ function showAlert(alert_type, message) {
 	if (!alert_anchor) { // IF anchor is not available in DOM.
 		alert_anchor = document.createElement('div');
 		alert_anchor.id = 'alert-anchor';
-		alert_anchor.classList = "w-auto start-0 ms-3 border-start border-5 slide-out-in-left";
+		alert_anchor.classList = "w-auto start-0 ms-3 border-start border-5 ";
 		document.getElementsByTagName('header')[0].appendChild(alert_anchor);
 		console.log("Anchor-Created");
 	}
@@ -96,7 +96,8 @@ function showAlert(alert_type, message) {
 	alert_anchor.appendChild(alert_el);
 	setTimeout(function () {
 		alert_el.classList.add("slide-out-left");
-		alert_anchor.remove();
+		// alert_anchor.remove();
+		alert_el.remove();
 	}, 5000);
 }
 
