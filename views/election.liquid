@@ -1,0 +1,122 @@
+{% layout "base-layout" %}
+
+{% block head %}
+
+  <head>
+    {% render 'header' title: title, js_scripts: js_scripts %}
+  </head>
+{% endblock %}
+
+{% block body %}
+
+  <div id="" class="row justify-content-center text-center text-white">
+    <header class="row justify-content-center mb-4 text-bold">
+      <div class="col-3">
+        <!-- <img src="/images/Polygon Luminary (1).svg" alt=""> -->
+        <img
+          src="/images/logo-fcs.png"
+          width="100"
+          alt="">
+      </div>
+      <div></div>
+    </header>
+    <div class="col-8 col-lg-6 py-4 index-bg">
+
+      {%- for position in positions %}
+        {%- assign unit_name = units[0] %}
+        {%- assign id = position | replace: ' ', '_' | downcase %}
+
+        <form
+          class=""
+          action=""
+          method="post">
+
+          <fieldset id="{{ position._id }}-fcs" class="mb-4">
+            <legend>{{ position.position }}</legend>
+            <div class="input-group mb-3">
+              <select
+                id="{{ position._id }}"
+                class="form-select {{ position._id }}"
+                name="{{ position._id }}"
+                onchange="nomineeChange(this)">
+                <option value=null selected>Pick a candidate:</option>
+              </select>
+              <button
+                type="button"
+                class="btn btn-outline-secondary "
+                style="font-size:20px; border-width: 3px; border-color: #6152ee;color:#ffffff">Recast Vote</button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <h5
+                    class="dropdown-item"
+                    href="#"
+                    onclick="recastVote('{{ position._id }}-fcs')">
+                    Recast your vote
+                  </h5>
+                </li>
+              </ul>
+              <span class="badge" style="width:54px;background-color:#ffffff"></span>
+
+            </div>
+            <!--
+            <div class="input-group mb-3">
+            <select
+            id="{{ id }}-2"
+            class="form-select {{ id }}"
+            name="{{ id }}"
+            onchange="nomineeChange(this)">
+            <option value=null selected>Second Nominee:</option>
+            </select>
+            <span class="badge" style="width:54px;background-color:#ffffff"></span>
+
+            </div>
+            -->
+            <button
+              type="button"
+              id="nomination_submit_btn"
+              onclick="nominate('{{ position._id }}')">
+              <span>
+                Vote
+              </span>
+            </button>
+          </fieldset>
+
+        </form>
+
+      {%- endfor %}
+
+      <form action="nomination/signout" method="post">
+        <button
+          class="mt-4 w-auto"
+          type="submit"
+          id="nomination_submit_btn">
+          <span>
+            My Work Here Is Done.
+          </span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {% if voting_entity %}
+    <script>
+      window.localStorage.setItem("voting_entity", {{ voting_entity | json }});
+      console.log("Entity Xtored.");
+    </script>
+  {% endif %}
+
+  <script>
+    window.fcs = {};
+    fcs.positions = {{ positions | json }};
+    fcs.candidates = {{ candidates | json }};
+    console.log(fcs.positions);
+    console.log(fcs.candidates);
+  </script>
+{% endblock %}
