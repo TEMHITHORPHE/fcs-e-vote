@@ -73,9 +73,19 @@ legend {
   z-index: 100;
 }
 
+.onsubmit{
+  font-size:20px;font-size: 20px; border-width: 3px; border-color: #6152ee; color: #ff0000;font-weight: bolder;text-shadow: 2px 0 black; border-width: 3px; border-color: #ff0000; display: none;
+}
+
+.onsubmit + button {
+  display: none; 
+}
+
+
 /* From uiverse.io by @Ali-Tahmazi99 */
 #nomination_submit_btn {
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: #6152ee;
   display: inline-block;
   width: 160px;
   height: 50px;
@@ -214,3 +224,4 @@ legend {
   border-color: #3898ec;
   outline: none;
 }
+

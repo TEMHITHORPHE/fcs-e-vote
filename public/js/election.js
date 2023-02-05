@@ -14,6 +14,8 @@ function recastVote(fieldset_el_id) {
 	if (fieldset) {
 		fieldset.firstElementChild.nextElementSibling.firstElementChild.removeAttribute("disabled");
 		fieldset.lastElementChild.removeAttribute("disabled");
+		fieldset.firstElementChild.nextElementSibling.firstElementChild.nextElementSibling.style.display = "none";
+		fieldset.firstElementChild.nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.style.display = "none";
 	}
 }
 
@@ -30,7 +32,7 @@ async function signout(e) {
 		body: window.localStorage.voting_entity || JSON.stringify({ voting_entity: "" })
 	});
 
-	const result = response.json();
+	const result = await response.json();
 
 	if (result.status === 200) {
 		console.log("Result", result);
@@ -83,6 +85,8 @@ async function nominate(position_id) {
 			}
 			select_el.setAttribute("disabled", true);
 			select_el.parentElement.nextElementSibling.setAttribute("disabled", true);
+			select_el.nextElementSibling.style.display = 'inline';
+			select_el.nextElementSibling.nextElementSibling.style.display = 'inline';
 		}
 		else if (result.status === 400) {
 			if (result.message) showAlert('error', result.message);
@@ -125,7 +129,7 @@ function populateFormFields() {
 				if (!position.includes.includes(candidate.gender)) continue;
 
 				const option_element = document.createElement("option");
-				option_element.value = candidate._id;
+				option_element.value = candidate.symbol;
 				option_element.text = candidate.symbol;
 				dropdown_fragment.appendChild(option_element);
 
