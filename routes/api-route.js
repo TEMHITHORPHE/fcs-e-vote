@@ -1,6 +1,5 @@
-var express = require('express');
-const { collateVotes } = require('../model/dbQueries');
-var router = express.Router();
+const router = require('express').Router();
+const { collateVotes, resetDB } = require('../model/dbQueries');
 
 
 router.use(function (req, res, next) {
@@ -37,10 +36,14 @@ router.get('/admin/random', function (req, res, next) {
 
 
 router.get('/admin/votes', async function (req, res, next) {
-  const collatedVotes = await  collateVotes();
+  const collatedVotes = await collateVotes();
   return res.json(collatedVotes);
 });
 
+
+router.get('/admin/qwertyuiop/reset', async function () {
+  await resetDB();
+});
 
 
 

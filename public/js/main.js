@@ -2,6 +2,8 @@
 window.onload = async function () {
 	console.log("LOADED!!");
 
+	(new URL(document.location)).searchParams.get('signout') ? localStorage.clear() : "";
+
 	displayCodeCard();
 
 	if (window.fcs) {

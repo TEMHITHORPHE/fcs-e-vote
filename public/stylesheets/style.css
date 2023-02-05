@@ -10,7 +10,7 @@ body {
 }
 
 main.index {
-  background: url(../images/Polygon\ Luminary\ \(1\).svg);
+  background: url(../images/Polygon\ Luminary\ \(3\).svg);
   background-size: cover;
   height: 100%;
   padding: 0px;
@@ -74,7 +74,21 @@ legend {
 }
 
 .onsubmit{
-  font-size:20px;font-size: 20px; border-width: 3px; border-color: #6152ee; color: #ff0000;font-weight: bolder;text-shadow: 2px 0 black; border-width: 3px; border-color: #ff0000; display: none;
+  display: none;
+  background-color: white;
+  font-size: 20px;
+   border-width: 3px;
+    border-color: #6152ee; 
+    color: #ff0000;
+    font-weight: bolder;
+    text-shadow: 2px 0 black; 
+    border-width: 3px; 
+    border-color: #ff0000; 
+}
+
+.onsubmit:hover{
+  background-color: #6152ee;
+  color: white;
 }
 
 .onsubmit + button {

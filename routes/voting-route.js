@@ -46,7 +46,7 @@ router.post('/nomination/signout', async function (req, res) {
   if (entity) {
     console.log("LogOut: ", entity);
     req.session = null;
-    return res.redirect('/');
+    return res.redirect('/?signout=true');
     // return res.json({ status: 200, reset: true });
   }
 });

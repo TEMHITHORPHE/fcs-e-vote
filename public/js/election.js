@@ -22,7 +22,7 @@ function recastVote(fieldset_el_id) {
 
 async function signout(e) {
 
-	if (window.localStorage.voting_entity) window.localStorage.voting_entity
+	if (window.localStorage.voting_entity) window.localStorage.voting_entity;
 
 	const response = await fetch('/election/election/signout', {
 		method: 'POST',
@@ -62,6 +62,25 @@ async function nominate(position_id) {
 	if (candidate_id === "null") {
 		showAlert('error', 'Nope ... really?');
 		return;
+	}
+
+
+	const session = localStorage.voting_entity;
+	// console.log("SESIION - ", session);
+	if (session) {
+		const votes = Object.entries(JSON.parse(session).votes);
+		// console.log("ENTRIES: ", votes);
+		for (let index = 0; index < votes.length; index++) {
+			const casted_vote = votes[index];
+			if (casted_vote[1] === candidate_id) {
+				showAlert('error', "You have voted for candidate " + candidate_id + " already.");
+				select_el.setAttribute("disabled", true);
+				select_el.parentElement.nextElementSibling.setAttribute("disabled", true);
+				select_el.nextElementSibling.style.display = 'inline';
+				select_el.nextElementSibling.nextElementSibling.style.display = 'inline';
+				return;
+			}
+		}
 	}
 
 	const response = await fetch('/election/election/' + position_id, {

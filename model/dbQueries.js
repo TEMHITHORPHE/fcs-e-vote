@@ -156,13 +156,10 @@ module.exports.castVote = async function castVote(positionId, candidateId, votin
 
 
 
-
 module.exports.collateVotes = async function collateVotes() {
 	await client.connect();
 
 	const posts = await client.db('E-Vote').collection('positions').find().toArray();
-
-	// console.log("Posts: ", posts);
 
 	const votes = await Promise.all(posts.map((position) => getVotesPerPost(position._id)));
 
@@ -172,8 +169,6 @@ module.exports.collateVotes = async function collateVotes() {
 		votes,
 		posts
 	}
-
-	// await getVotesPerPost("63dde3832a32a160ba67e037");
 }
 
 
@@ -203,19 +198,23 @@ async function getVotesPerPost(post) {
 		)
 		.toArray();
 
-
-	// const docs = await client.db('E-Vote').collection('votes').find({
-	// 	[`votes.${post}`]: { $exists: true }
-	// },
-	// 	{
-	// 		'_id': 0, 'access_token': 1, 'vote': `$votes.${post}`, 'votes': 0, 'voter_unit': 1
-	// 	}
-	// ).toArray();
-
 	console.log("DOCSSS : ", docs);
 
 	return docs;
+}
 
+
+
+
+module.exports.resetDB = async function resetDB() {
+
+	await client.connect();
+
+	const db = client.db('E-Vote');
+
+	await db.collection('votes').updateMany({}, { $set: { votes: {} } });
+
+	await db.collection('access_codes').updateMany({ is_used: true }, { $set: { is_used: false } });
 }
 
 // module.exports.candidates = function 
