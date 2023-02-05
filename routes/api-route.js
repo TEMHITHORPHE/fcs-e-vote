@@ -1,6 +1,13 @@
 var express = require('express');
+const { collateVotes } = require('../model/dbQueries');
 var router = express.Router();
 
+
+router.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 /* GET users listing. */
 router.get('/admin/random', function (req, res, next) {
 
@@ -26,5 +33,27 @@ router.get('/admin/random', function (req, res, next) {
   console.log(generateString(5));
   res.send('respond with a resource');
 });
+
+
+
+router.get('/admin/votes', async function (req, res, next) {
+  const collatedVotes = await  collateVotes();
+  return res.json(collatedVotes);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

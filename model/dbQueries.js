@@ -141,7 +141,7 @@ module.exports.castVote = async function castVote(positionId, candidateId, votin
 	await client.connect();
 
 	const query = { access_token: votingToken, };
-	const update = { $set: { ["votes." + new ObjectId(positionId)]: new ObjectId(candidateId) } };
+	const update = { $set: { ["votes." + new ObjectId(positionId)]: candidateId } };
 	const options = { upsert: true };
 
 	const casted_vote = await client.db('E-Vote')
@@ -154,5 +154,68 @@ module.exports.castVote = async function castVote(positionId, candidateId, votin
 }
 
 
+
+
+
+module.exports.collateVotes = async function collateVotes() {
+	await client.connect();
+
+	const posts = await client.db('E-Vote').collection('positions').find().toArray();
+
+	// console.log("Posts: ", posts);
+
+	const votes = await Promise.all(posts.map((position) => getVotesPerPost(position._id)));
+
+	console.log("VOTES: ", posts);
+
+	return {
+		votes,
+		posts
+	}
+
+	// await getVotesPerPost("63dde3832a32a160ba67e037");
+}
+
+
+
+async function getVotesPerPost(post) {
+
+	await client.connect();
+
+	const docs = await client.db('E-Vote').collection('votes')
+		.aggregate(
+			[
+				{
+					'$match': {
+						[`votes.${post}`]: {
+							'$exists': true
+						}
+					}
+				}, {
+					'$project': {
+						'_id': 0,
+						'access_token': 1,
+						'voter_unit': 1,
+						'vote': `$votes.${post}`
+					}
+				}
+			]
+		)
+		.toArray();
+
+
+	// const docs = await client.db('E-Vote').collection('votes').find({
+	// 	[`votes.${post}`]: { $exists: true }
+	// },
+	// 	{
+	// 		'_id': 0, 'access_token': 1, 'vote': `$votes.${post}`, 'votes': 0, 'voter_unit': 1
+	// 	}
+	// ).toArray();
+
+	console.log("DOCSSS : ", docs);
+
+	return docs;
+
+}
 
 // module.exports.candidates = function 
