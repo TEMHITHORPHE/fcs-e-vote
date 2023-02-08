@@ -1,5 +1,9 @@
 
+function disableSelection(e) {
+	e.selectedOptions[0].value !== null ? e.setAttribute('disabled', true) : "";
+}
 
+// Change label colour on dropdown change.
 function nomineeChange(select_el) {
 	console.log(select_el.value);
 	if (select_el) {
@@ -40,6 +44,7 @@ async function signout(e) {
 			window.localStorage.clear();
 			location.replace('/');
 		}
+		//  Force redirect
 		location.replace('/');
 	}
 }
@@ -53,17 +58,23 @@ async function nominate(position_id) {
 
 	// console.log("Passed through: " + position_id);
 	const select_el = document.getElementById(position_id);
-	if (!select_el) return;
 	const candidate_id = select_el.selectedOptions[0].value;
-	if (!candidate_id) return;
 
 	console.log(candidate_id);
+	if (!select_el) return;
 
 	if (candidate_id === "null") {
 		showAlert('error', 'Nope ... really?');
 		return;
 	}
 
+	const unit_name = document.getElementById('unit_name').selectedOptions[0].value;
+	const gender = document.getElementById('gender').selectedOptions[0].value;
+	console.log(unit_name, gender);
+	if (unit_name === "null" || gender === "null") {
+		showAlert('error', "Gender and Unit have to be specified!");
+		return;
+	}
 
 	const session = localStorage.voting_entity;
 	// console.log("SESIION - ", session);
@@ -74,10 +85,10 @@ async function nominate(position_id) {
 			const casted_vote = votes[index];
 			if (casted_vote[1] === candidate_id) {
 				showAlert('error', "You have voted for candidate " + candidate_id + " already.");
-				select_el.setAttribute("disabled", true);
-				select_el.parentElement.nextElementSibling.setAttribute("disabled", true);
-				select_el.nextElementSibling.style.display = 'inline';
-				select_el.nextElementSibling.nextElementSibling.style.display = 'inline';
+				// select_el.setAttribute("disabled", true);
+				// select_el.parentElement.nextElementSibling.setAttribute("disabled", true);
+				// select_el.nextElementSibling.style.display = 'inline';
+				// select_el.nextElementSibling.nextElementSibling.style.display = 'inline';
 				return;
 			}
 		}
@@ -88,7 +99,7 @@ async function nominate(position_id) {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ candidate: candidate_id })
+		body: JSON.stringify({ candidate: candidate_id, voter_unit: unit_name, gender: gender })
 	});
 
 	const result = await response.json();
@@ -160,6 +171,7 @@ function populateFormFields() {
 }
 
 
+
 // function updateDropDownFields(class_selector, dropdown_subtree) {
 // 	console.log("SELECTOR: ", class_selector);
 // 	const dropdowns = document.getElementsByClassName(class_selector);
@@ -173,13 +185,34 @@ function populateFormFields() {
 
 
 
-
 window.addEventListener('load', function () {
+	// document.getElementById('63dde4562a32a160ba67e03c').value = "X";
 	console.log("[nomination.js] - LOADED!!");
 	if (window.fcs) {
 		console.log("FCS-FOUND: ", fcs);
 		if (fcs.candidates) {
 			populateFormFields();
+			if (localStorage.voting_entity) {
+				const entity = JSON.parse(localStorage.voting_entity);
+				console.log("ENTITY:  ", entity);
+				const vote_store = entity.votes;
+				if (entity.gender && entity.voter_unit) {
+					document.getElementById('gender').value = entity.gender;
+					document.getElementById('unit_name').value = entity.voter_unit;
+				}
+				console.log(vote_store);
+				for (const key in vote_store) {
+					// console.log(key, " - ", vote_store[key]);
+					const select_el = document.getElementById(key)
+					select_el.value = vote_store[key];
+					select_el.setAttribute("disabled", true);
+					select_el.parentElement.nextElementSibling.setAttribute("disabled", true);
+					select_el.nextElementSibling.style.display = 'inline';
+					select_el.nextElementSibling.nextElementSibling.style.display = 'inline';
+					select_el.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.style.backgroundColor = 'green';
+
+				}
+			}
 		}
 	}
 })
