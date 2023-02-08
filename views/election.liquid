@@ -22,6 +22,39 @@
     </header>
     <div class="col-8 col-lg-6 py-4 index-bg">
 
+      <div class="mb-3 row">
+        <div class="input-group col">
+          <select
+            id="gender"
+            class="form-select"
+            name="gender"
+            onchange="disableSelection(this)">
+            <option value="null" selected>Select your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="input-group col">
+          <select
+            id="unit_name"
+            class="form-select"
+            name="unit_name"
+            onchange="disableSelection(this)">
+            <option value="null" selected>Select your unit</option>
+            <option value="Press Unit">Press Unit</option>
+            <option value="Evangelism Unit">Evangelism Unit</option>
+            <option value="Designers Unit">Designers Unit</option>
+            <option value="Maintenance Unit">Maintenance Unit</option>
+            <option value="Bible Study Unit">Bible Study Unit</option>
+            <option value="Organizing Unit">Organizing Unit</option>
+            <option value=">Drama Unit">Drama Unit</option>
+            <option value="Prayer Unit">Prayer Unit</option>
+            <option value=">Ushering Unit">Ushering Unit</option>
+            <option value="Music Unit">Music Unit</option>
+          </select>
+        </div>
+      </div>
+
       {%- for position in positions %}
         {%- assign unit_name = units[0] %}
         {%- assign id = position | replace: ' ', '_' | downcase %}
