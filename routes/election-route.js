@@ -37,13 +37,15 @@ router.post('/election/:position_id', async function (req, res, next) {
 
 	if (position_id && candidate_id) {
 
-		const vote_result = await castVote(position_id, candidate_id, access_token);
+		const vote_result = await castVote(position_id, access_token, req);
 
-		if (vote_result.modifiedCount === 1 || vote_result.updatedCount === 1) {
+		if (vote_result.modifiedCount === 1 || vote_result.upsertedCount === 1) {
 
 			// Create a modified entity session
 			const entity = {
 				...req.session.entity,
+				gender: req.body.gender,
+				voter_unit: req.body.voter_unit,
 				votes: {
 					...req.session.entity.votes,
 					[position_id]: candidate_id

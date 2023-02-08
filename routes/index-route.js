@@ -50,7 +50,7 @@ async function Election(req, res, method) {
       if (AccessCodes) {
 
         delete AccessCodes.is_used;
-        const entity = { ...AccessCodes, votes:{} };
+        const entity = { ...AccessCodes, gender:"", voter_unit:"", votes:{}, };
 
         nominators.addNominator(AccessCodes.access_token);
         req.session.entity = entity;
