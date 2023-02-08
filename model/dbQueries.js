@@ -136,12 +136,12 @@ module.exports.getPositions = async function getPositions() {
 }
 
 
-module.exports.castVote = async function castVote(positionId, candidateId, votingToken) {
+module.exports.castVote = async function castVote(positionId, votingToken, req,) {
 
 	await client.connect();
 
 	const query = { access_token: votingToken, };
-	const update = { $set: { ["votes." + new ObjectId(positionId)]: candidateId } };
+	const update = { $set: { ["votes." + new ObjectId(positionId)]: req.body.candidate, gender: req.body.gender, voter_unit: req.body.voter_unit, campus: req.session.entity.campus} };
 	const options = { upsert: true };
 
 	const casted_vote = await client.db('E-Vote')
@@ -206,15 +206,6 @@ async function getVotesPerPost(post) {
 
 
 
-module.exports.resetDB = async function resetDB() {
 
-	await client.connect();
-
-	const db = client.db('E-Vote');
-
-	await db.collection('votes').updateMany({}, { $set: { votes: {} } });
-
-	await db.collection('access_codes').updateMany({ is_used: true }, { $set: { is_used: false } });
-}
 
 // module.exports.candidates = function 
